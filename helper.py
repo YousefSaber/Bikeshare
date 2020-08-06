@@ -89,8 +89,7 @@ def time_stats(df):
     Most_common_day_of_week = df["Start Time"].dt.dayofweek.mode()
     dayofweek = calendar.day_name[Most_common_day_of_week[0]]
     Most_common_day_of_week_count = df["Start Time"].dt.dayofweek.value_counts()
-    Most_common_day_of_week_count = Most_common_day_of_week_count.iloc[0] 
-    print(calendar.firstweekday)
+    Most_common_day_of_week_count = Most_common_day_of_week_count.iloc[0]
     print("The most common day of week : {} , count : {}".format(dayofweek,Most_common_day_of_week_count))
 
     # display the most common start hour
@@ -105,19 +104,29 @@ def time_stats(df):
 def station_stats(df):
     """Displays statistics on the most popular stations and trip."""
 
-    print('\nCalculating The Most Popular Stations and Trip...\n')
-    start_time = time.time()
 
     # display most commonly used start station
 
+    Most_common_start_station = df["Start Station"].mode()
+    Most_common_start_station_count = df["Start Station"].value_counts()
+    Most_common_start_station_count = Most_common_start_station_count.iloc[0]
 
+    print("The most common start station : {}, count : {}".format(Most_common_start_station[0],Most_common_start_station_count))
     # display most commonly used end station
 
+    Most_common_end_station = df["End Station"].mode()
+    Most_common_end_station_count = df["End Station"].value_counts()
+    Most_common_end_station_count = Most_common_end_station_count.iloc[0]
+
+    print("The most common end station : {}, count : {}".format(Most_common_end_station[0],Most_common_end_station_count))
 
     # display most frequent combination of start station and end station trip
 
+    most_start_finish = df.groupby(["Start Station","End Station"]).size().idxmax()
+    most_start_finish_count =   df[["Start Station","End Station"]].value_counts(sort=True).iloc[0]
 
-    print("\nThis took %s seconds." % (time.time() - start_time))
+    print("The most frequent combination of start and finish station : {} and {}, count : {}".format(most_start_finish[0],most_start_finish[1],most_start_finish_count))
+
     print('-'*40)
 
 
