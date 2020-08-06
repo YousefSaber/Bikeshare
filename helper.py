@@ -17,15 +17,15 @@ def get_filters():
     """
     print('Hello! Let\'s explore some US bikeshare data!')
     # get user input for city (df, new york city, washington). we will use recursive functions to handle invaild inputs 
-    city = input( "Choose the city to display its stats data (Your Options are `chicago`,`new york`,`washington`)\n ")
+    city = input( "Choose the city to display its stats data (Your Options are `chicago`,`new york city`,`washington`)\n ")
     city = city.lower() #handle upper casses character
     # get user input for month (all, january, february, ... , june)
-    month = int(input("choose which month to filter data by your choices are (e.g., 1=Jan,....,12=Dec,13=All\n"))
+    month = int(input("choose which month to filter data by your choices are (e.g., 1=Jan,....,12=Dec,13=All)\n"))
 
     # get user input for day of week (all, monday, tuesday, ... sunday)
-    day = int(input("choose which day of week you want to filter your data by (e.g.,1=Saturday,2=sunday,.....,8=all\n"))
+    day = int(input("choose which day of week you want to filter your data by (e.g.,1=Saturday,2=sunday,.....,8=all)\n"))
 
-    if city not in ["chicago","new york","washington"]:   # we handle the errors here by recursions
+    if city not in ["chicago","new york city","washington"]:   # we handle the errors here by recursions
         print("Invalid city")
         city, month, day = get_filters()
     if month not in range(1,14,1):
@@ -69,8 +69,6 @@ def load_data(city, month, day):
     if month < 13 and day < 8:
         df =df[(df["Start Time"].dt.month == month) & (df["End Time"].dt.dayofweek == day)]
         return df
-        print(df)
-        return df 
 
 
 def time_stats(df):
@@ -133,36 +131,50 @@ def station_stats(df):
 def trip_duration_stats(df):
     """Displays statistics on the total and average trip duration."""
 
-    print('\nCalculating Trip Duration...\n')
-    start_time = time.time()
+
 
     # display total travel time
-
+    Total_Travel_Time = df["Trip Duration"].sum()
 
     # display mean travel time
+    Average_Travel_Time = df["Trip Duration"].mean()
 
-
-    print("\nThis took %s seconds." % (time.time() - start_time))
+    print("Total Travel Time : {} \nAverage Travel Time : {}".format(Total_Travel_Time,Average_Travel_Time))
     print('-'*40)
 
 
-def user_stats(df):
+def user_stats(df,city):
     """Displays statistics on bikeshare users."""
 
-    print('\nCalculating User Stats...\n')
-    start_time = time.time()
 
     # Display counts of user types
-
+    User_Type_count = df["User Type"].value_counts()
+    print("User Types count")
+    for x in User_Type_count.index:
+        print("{} : {}".format(x,User_Type_count[x]))
+    print('-'*40)
 
     # Display counts of gender
+    if city in ["chicago","new york city"]:
+        Gender_count = df["Gender"].value_counts()
+        print("Gender Count \nMale : {}\nFemale : {}".format(Gender_count["Male"],Gender_count["Female"]))
+        print('-'*40)
+        most_common_birth_year = df["Birth Year"].mode()
+        df["Birth Year"].value_counts()
+        most_common_birth_year_count = df["Birth Year"].value_counts().iloc[0]
+        x = df.sort_values(by = ["Start Time"],kind='heapsort',ascending=False)
+        most_recent_year = x.iloc[0,-1]
+        # Display earliest, most recent, and most common year of birth
+
+        print("Most common birthyear : {}, count : {}".format(most_common_birth_year.iloc[0],most_common_birth_year_count))
+        print('-'*40)
+        print("Most recent birth year : {}".format(most_recent_year))
+        print('-'*40)
 
 
-    # Display earliest, most recent, and most common year of birth
 
 
-    print("\nThis took %s seconds." % (time.time() - start_time))
-    print('-'*40)
+
 
 
 
