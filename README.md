@@ -25,7 +25,15 @@ The application obtain the following infromation
 ***
 ## Instuctions about using the program
 
-you'll clone or download the files in one directory then open a command line window in the same directory and type 
+First of All you must make sure that [`python3`](https://www.python.org/) is installed on your computer and it's added in the `PATH` environment variable.
+you can type the command to verify it's working 
+```
+joseph@DESKTOP-ET6MUFK:~$ python3 --version
+Python 3.8.2
+```
+note that any other python3 version may be installed on your computer so you may get another python3 version output but if you got an error that means that python3 isn't installed correctly on your PC.
+
+Then you'll clone or download the files in one directory then open a command line window in the same directory and type 
 ```
 python3 bikeshare.py
 ```
