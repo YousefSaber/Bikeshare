@@ -31,10 +31,22 @@ you can type the command to verify it's working
 joseph@DESKTOP-ET6MUFK:~$ python3 --version
 Python 3.8.2
 ```
+the above steps work on **Linux** if you are on **Windows** you'll type 
+```
+py --version
+```
 note that any other python3 version may be installed on your computer so you may get another python3 version output but if you got an error that means that python3 isn't installed correctly on your PC.
 
 Then you'll clone or download the files in one directory then open a command line window in the same directory and type 
+
 ```
 python3 bikeshare.py
 ```
+
+if you are on **Linux** but if you are on **Windows** you'll type 
+
+```
+py bikeshare.py
+```
+
 ***
