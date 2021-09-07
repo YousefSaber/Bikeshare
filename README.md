@@ -50,3 +50,6 @@ py bikeshare.py
 ```
 
 ***
+## **Important Note**
+* The program may not work if [Pandas](https://pandas.pydata.org/) library isn't installed on your computer. 
+***
